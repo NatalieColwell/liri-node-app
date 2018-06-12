@@ -22,7 +22,7 @@ var client = new Twitter(keys.twitter);
 // * 'do-what-it-says
 
 
-//spotify
+//Spotify - music/artist search function
 function mySpotify() {
 
     if(userInput != false) {
@@ -67,7 +67,7 @@ function mySpotify() {
 }
 mySpotify();
 
-//Twitter
+//Twitter - Tweet function
 function myTweets() {
     var params = {screen_name: 'nat_codewell'} && {count: 20};
 
@@ -86,7 +86,7 @@ function myTweets() {
 }
 myTweets();
 
-//OMDB movie search
+//OMDB movie search function
 function myMovies() {
     request('http://www.omdbapi.com/?t=' + userInput + '&y=&plot=short&tomatoes=true&apikey=trilogy', function(error, response, body) {
         if(userInput != false) {
@@ -104,18 +104,33 @@ function myMovies() {
             request('http://www.omdbapi.com/?t=mr+nobody&y=&plot=short&tomatoes=true&apikey=trilogy')
 
             console.log("---------------------------" + '\r\n');
-            console.log("Movie Title: " + JSON.parse(body).title + '\r\n');
-            console.log("Movie Release Year: " + JSON.parse(body).year + '\r\n');
+            console.log("Movie Title: " + JSON.parse(body).Title + '\r\n');
+            console.log("Movie Release Year: " + JSON.parse(body).Year + '\r\n');
             console.log("Rating: " + JSON.parse(body).imdbRating + '\r\n');
-            console.log("Rotten Tomoatoe Rating: " + JSON.parse(body).tomatoRating + '\r\n');
-            console.log("Film was produced in: " + JSON.parse(body).country + '\r\n');
-            console.log("The language of the movie is: " + JSON.parse(body).language + '\r\n');
-            console.log("The movie plot is: " + JSON.parse(body).plot + '\r\n');
-            console.log("Actors featured in the film: " + JSON.parse(body).actors + '\r\n');
+            console.log("Rotten Tomoatoe Rating: " + JSON.parse(body).tomatoeRating + '\r\n');
+            console.log("Film was produced in: " + JSON.parse(body).Country + '\r\n');
+            console.log("The language of the movie is: " + JSON.parse(body).Language + '\r\n');
+            console.log("The movie plot is: " + JSON.parse(body).Plot + '\r\n');
+            console.log("Actors featured in the film: " + JSON.parse(body).Actors + '\r\n');
             console.log("---------------------------"); 
         }
     })
 }
+myMovies();
 
-
-
+//commands
+switch(liriArg) {
+    case "spotify-this-song": mySpotify();
+        break;
+    case "my-tweets": myTweets();
+        break;
+    case "movie-this": myMovies();
+        break;
+        
+console.log("Instructions: " + '\r\n');
+console.log("type any of the below commands, directly following node liri.js in your terminal" + 
+'\r\n' + "remember to place song and/or movie titles inside 'quptes' " +'\r\n' + 
+"example1: node liri.js spotify-this-song 'type song title' " + '\r\n' +
+"example2: node liri.js my-tweets" + '\r\n' +
+"example3: node liri.js movie-this 'type movie title' " + '\r\n')        
+};
